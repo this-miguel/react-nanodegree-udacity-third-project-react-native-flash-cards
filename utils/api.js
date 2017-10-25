@@ -15,7 +15,7 @@ export function getDeck(key){
     .then(data => data[key])
 }
 
-export function saveDeck(title) {
+export function newDeck(title) {
   return AsyncStorage.mergeItem(DECK_LIBRARY, JSON.stringify({
     [title]: {}
   }))
