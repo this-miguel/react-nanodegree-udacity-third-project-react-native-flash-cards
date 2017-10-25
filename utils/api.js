@@ -14,3 +14,9 @@ export function getDeck(key){
   return getDecks()
     .then(data => data[key])
 }
+
+export function saveDeck(title) {
+  return AsyncStorage.mergeItem(DECK_LIBRARY, JSON.stringify({
+    [title]: {}
+  }))
+}

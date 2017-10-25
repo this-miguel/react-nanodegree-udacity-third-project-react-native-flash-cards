@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { getDeck, getDecks, initializeDeckLibrary} from './utils/api'
+import { getDeck, getDecks, initializeDeckLibrary, saveDeck} from './utils/api'
 
 export default class App extends React.Component {
 
@@ -12,12 +12,13 @@ export default class App extends React.Component {
   componentWillMount(){
     const testData = {helloDeck: {title: 'helloDeck'}} ;
     initializeDeckLibrary(testData)
+    saveDeck('newDeck');
   }
 
   componentDidMount(){
-     getDecks()
-      .then(data => this.setState({data: data}))
-    getDeck('helloDeck')
+    getDecks()
+      .then(data => this.setState({data: data}));
+    getDeck('newDeck')
       .then(data => this.setState({deck: data}))
   }
 
