@@ -7,5 +7,10 @@ export function initializeDeckLibrary(data){
 
 export function getDecks(){
   return AsyncStorage.getItem(DECK_LIBRARY)
-    .then((data) => { return JSON.parse(data) })
+    .then((data) => JSON.parse(data))
+}
+
+export function getDeck(key){
+  return getDecks()
+    .then(data => data[key])
 }
