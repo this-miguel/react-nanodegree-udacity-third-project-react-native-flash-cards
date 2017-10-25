@@ -18,7 +18,10 @@ const api = {
 
   newDeck: (title) => (
     AsyncStorage.mergeItem(DECK_LIBRARY, JSON.stringify({
-      [title]: {}
+      [title]: {
+        title: title,
+        questions:[],
+      }
     }))
   ),
 
@@ -30,7 +33,20 @@ const api = {
       // This part is just to return the updated deck.
       this.getDeck(key)
     ))
-  }
+  },
+  addCard: function (deckKey, card) {
+    return this.getDeck(deckKey)
+      .then( (oldDeck) => {
+        return {
+          ...oldDeck,
+          questions: [
+            ...oldDeck.questions,
+            card
+          ]
+        };
+      })
+      .then(updatedDeck => this.updateDeck(deckKey, updatedDeck) )
+  },
 };
 
 export default api;

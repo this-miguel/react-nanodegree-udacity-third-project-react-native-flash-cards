@@ -10,24 +10,40 @@ export default class App extends React.Component {
   };
 
   componentWillMount(){
-    const testData = {
+    const sampleData = {
       helloDeck: {title: 'helloDeck'},
-      textDeck: {title: 'testDeck'},
+      testDeck: {
+        title: 'testDeck',
+        questions: []
+      },
     } ;
-    api.initializeDeckLibrary(testData);
+    api.initializeDeckLibrary(sampleData);
     api.newDeck('newDeck');
+    const testData = {
+      title: 'testDeck',
+      questions: [
+        {
+          question: 'is this data going to be preserved?',
+          answer: 'Yes, it should be preserved.'
+        }
+      ]
+    };
+    api.updateDeck('testDeck', testData)
+      .then( data => this.setState({data: data}) );
+
+    const card = {
+      question: 'is this going to work?',
+      answer: 'Yes!, in the long run.'
+    };
+    api.addCard('testDeck', card)
+      .then( data => this.setState({data: data}) )
   }
 
   componentDidMount(){
     api.getDeck('newDeck')
       .then(data => this.setState({deck: data}))
-    const testData = {
-      title: 'testDeck',
-      data: 'some data'
-    };
-    api.updateDeck('testDeck', testData);
     api.getDecks()
-      .then(data => this.setState({data: data}));
+       .then(data => this.setState({data: data}));
   }
 
 
