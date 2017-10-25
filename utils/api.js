@@ -16,14 +16,16 @@ const api = {
       .then(data => data[key])
   },
 
-  newDeck: (title) => (
-    AsyncStorage.mergeItem(DECK_LIBRARY, JSON.stringify({
+  newDeck: function (title) {
+    return AsyncStorage.mergeItem(DECK_LIBRARY, JSON.stringify({
       [title]: {
         title: title,
         questions:[],
       }
     }))
-  ),
+      // returns the new deck
+      .then( () => this.getDeck(title))
+  },
 
   updateDeck: function (key, data) {
     // As this merges the data inside the DECK_LIBRARY, this will also creates the deck if it does not exist.
