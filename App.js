@@ -1,13 +1,28 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { getDecks, initializeDeckLibrary} from './utils/api'
 
 export default class App extends React.Component {
+
+  state = {
+    deckLibrary: 'no data yet'
+  };
+
+  componentWillMount(){
+    const testData = {helloDeck: {title: 'helloDeck'}} ;
+    initializeDeckLibrary(testData)
+  }
+
+  componentDidMount(){
+     getDecks()
+      .then(data => this.setState({deckLibrary: data}))
+  }
+
   render() {
+    const {deckLibrary} = this.state;
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
+        <Text>{JSON.stringify(deckLibrary)}</Text>
       </View>
     );
   }
