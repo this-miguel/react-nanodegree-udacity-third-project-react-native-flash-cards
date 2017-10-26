@@ -8,7 +8,9 @@ export default function reducer(state={}, {data, type}) {
     case ADD_CARD : // This action returns the deck where the card was added.
       return {
         ...state,
-        data
+        [data.title] : {
+          ...data
+        }
       };
     case GET_DECKS :
       return data;
