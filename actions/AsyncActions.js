@@ -78,6 +78,7 @@ export const asyncAddCard = (dispatch) => (key, data) => {
   api
     .addCard(key, data)
     .then( data => {
+      // data here is the updated deck where card was added.
       dispatch( addCard(data))
     })
 };
