@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import  { connect } from 'react-redux'
-import { Text, ScrollView, View } from 'react-native';
+import { Text, ScrollView, View, TouchableOpacity } from 'react-native';
 
 import {
   asyncGetDecks,
@@ -15,11 +15,23 @@ class DeckListDisconnected extends Component {
   }
 
   render(){
-    const {decks} =  this.props;
+
+    const { decks, navigation } =  this.props;
+    const { navigate } = navigation;
+
     return(
       <ScrollView>
         {
-          decks.map( deck => <DeckListItem key={deck.title} title={deck.title} questionsNumber={deck.questions.length} /> )
+          decks.map( deck => (
+
+            <TouchableOpacity key={deck.title} onPress={ () => navigate( 'DeckMenu', {deckKey: deck.title} ) }>
+                <DeckListItem
+                  title={deck.title}
+                  questionsNumber={deck.questions.length}
+                />
+            </TouchableOpacity>
+
+          ))
         }
       </ScrollView>
     )

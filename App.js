@@ -1,9 +1,10 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import {TabNavigator} from 'react-navigation'
+import { StyleSheet } from 'react-native';
+import { TabNavigator, StackNavigator } from 'react-navigation'
 import store from './utils/store'
 import  { Provider } from 'react-redux'
 import DeckList from './components/DeckList'
+import DeckMenu from './components/DeckMenu'
 
 const Tabs = TabNavigator({
   DeckList: {
@@ -13,14 +14,43 @@ const Tabs = TabNavigator({
       // TODO: add tabBarIcon key
     }
   }
+},{
+  navigationOptions: {
+  header: null
+  },
+  tabBarOptions: {
+    activeTintColor: 'white',
+    style: {
+      height: 56,
+      backgroundColor: 'blue',
+      shadowColor: 'rgba(0,0,0,0.24)',
+      shadowOffset: {
+        width: 0,
+        height: 3
+      },
+      shadowRadius: 6,
+      shadowOpacity: 1,
+    }
+  }
 });
+
+ const  MainNavigator = StackNavigator({
+   Home:{
+     screen: Tabs
+   },
+   DeckMenu: {
+     screen: DeckMenu
+     //TODO: add navigation options to style the header
+   }
+
+ });
 
 export default class App extends React.Component {
 
   render() {
     return (
       <Provider store={store}>
-        <Tabs/>
+        <MainNavigator/>
       </Provider>
     );
   }

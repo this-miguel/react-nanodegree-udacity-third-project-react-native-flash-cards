@@ -43,7 +43,7 @@ const getDeck = (data) => (
   }
 );
 
-export const asyncGetDeck = (dispatch) => (key) => {
+export const asyncGetDeck = (dispatch) => (key) => () => {
   api
     .getDeck(key)
     .then( data => {
