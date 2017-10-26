@@ -1,18 +1,26 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import api from './utils/api'
+import {TabNavigator} from 'react-navigation'
 import store from './utils/store'
 import  { Provider } from 'react-redux'
-import ReduxShowConnected from './components/ReduxShow'
+import DeckList from './components/DeckList'
+
+const Tabs = TabNavigator({
+  DeckList: {
+    screen: DeckList,
+    navigationOptions: {
+      tabBarLabel: 'Your Decks',
+      // TODO: add tabBarIcon key
+    }
+  }
+});
 
 export default class App extends React.Component {
 
   render() {
     return (
       <Provider store={store}>
-        <View style={styles.container}>
-          <ReduxShowConnected/>
-        </View>
+        <Tabs/>
       </Provider>
     );
   }
