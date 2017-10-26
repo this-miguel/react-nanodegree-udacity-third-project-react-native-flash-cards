@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import  { connect } from 'react-redux'
 import { Text, View } from 'react-native';
+import api from '../utils/api'
 import {
   asyncNewDeck,
   asyncGetDecks,
@@ -12,20 +13,46 @@ import {
 class ReduxShow extends Component {
 
   componentWillMount(){
-
+    /*
+    //api.initializeDeckLibrary({});
     const {
       asyncNewDeck,
-      asyncGetDecks
+      asyncGetDecks,
+      asyncUpdateDeck,
+      asyncAddCard
     } = this.props;
 
-    //asyncNewDeck('newTest');
+    asyncNewDeck('testDeck1');
 
+
+    const sampleData = {
+        title: 'myNewDeck',
+        questions: [
+          {
+            question: 'this works?',
+            answer: 'yes',
+          }
+        ]
+    };
+
+    const testCard = {
+      question: 'and this works?',
+      answer: 'it should work, it should work also',
+    };
+
+
+    asyncAddCard('myNewDeck', testCard )
+    asyncGetDeck('myNewDeck')
+    */
   }
   componentDidMount(){
+    /*
     const {
-      asyncGetDecks
+      asyncGetDecks,
+      asyncGetDeck
     } = this.props;
     asyncGetDecks();
+    */
   }
 
   render(){
@@ -49,8 +76,11 @@ function mapStateToProps(state){
 
 function mapDispatchToProps(dispatch){
   return {
-    asyncNewDeck:  asyncNewDeck(dispatch),
-    asyncGetDecks:  asyncGetDecks(dispatch)
+    asyncNewDeck:   asyncNewDeck(dispatch),
+    asyncGetDecks:  asyncGetDecks(dispatch),
+    asyncGetDeck:   asyncGetDeck(dispatch),
+    asyncAddCard:   asyncAddCard(dispatch),
+    asyncUpdateDeck: asyncUpdateDeck(dispatch)
   }
 }
 ReduxShowConnected = connect(
