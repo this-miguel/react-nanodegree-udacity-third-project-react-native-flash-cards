@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import  { connect } from 'react-redux'
+import help from '../utils/helpers'
 import { Text, TextInput, View, TouchableOpacity } from 'react-native';
 
 import {
@@ -23,21 +24,28 @@ class NewDeckDisconnected extends Component {
 
   render(){
 
+    const { text } = this.state;
+    const {replaceWhiteSpaces} = help;
+    const validDeckName = replaceWhiteSpaces(text).length !== 0    ;
 
     return(
       <View>
         <Text>Please enter the name of the new deck</Text>
         <TextInput
           onChangeText={(text) => this.setState({text})}
-          value={this.state.text}
+          value={text}
         />
-        <TouchableOpacity
-          onPress={this.handleSubmit}
-        >
+        {
+          validDeckName &&
+          <TouchableOpacity
+            onPress={this.handleSubmit}
+          >
             <Text>
               Submit
             </Text>
-        </TouchableOpacity>
+          </TouchableOpacity>
+        }
+
       </View>
     )
   }
