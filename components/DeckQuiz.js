@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import  { connect } from 'react-redux'
-import { Text, View} from 'react-native';
-import help from '../utils/helpers'
+import FlippableCard from './FlippableCard'
 
 import {
   asyncGetDeck,
@@ -19,11 +18,7 @@ class DeckQuizDisconnected extends Component {
     const {deck, navigation} =  this.props;
     const { navigate } =  navigation;
     return(
-      <View>
-        <Text>{deck.title}</Text>
-        <Text>DeckQuiz Component</Text>
-
-      </View>
+        <FlippableCard/>
     )
   }
 
