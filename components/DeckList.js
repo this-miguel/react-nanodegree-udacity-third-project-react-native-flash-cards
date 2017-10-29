@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import  { connect } from 'react-redux'
 import { Text, ScrollView, View, TouchableOpacity } from 'react-native';
+import help from '../utils/helpers'
 
 import {
   asyncGetDecks,
@@ -18,13 +19,14 @@ class DeckListDisconnected extends Component {
 
     const { decks, navigation } =  this.props;
     const { navigate } = navigation;
+    const { replaceWhiteSpaces } = help;
 
     return(
       <ScrollView>
         {
           decks.map( deck => (
 
-            <TouchableOpacity key={deck.title} onPress={ () => navigate( 'DeckMenu', {deckKey: deck.title} ) }>
+            <TouchableOpacity key={deck.title} onPress={ () => navigate( 'DeckMenu', {deckKey: replaceWhiteSpaces(deck.title) } ) }>
                 <DeckListItem
                   title={deck.title}
                   questionsNumber={deck.questions.length}

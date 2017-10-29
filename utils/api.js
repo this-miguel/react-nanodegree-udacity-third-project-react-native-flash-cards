@@ -1,5 +1,8 @@
 import { AsyncStorage } from 'react-native'
+import help from './helpers'
 export const DECK_LIBRARY = 'MobileFlashcards:DeckLibrary';
+
+ const {replaceWhiteSpaces} =  help;
 
 const api = {
   initializeDeckLibrary: function (data){
@@ -18,8 +21,8 @@ const api = {
 
   newDeck: function (title) {
     return AsyncStorage.mergeItem(DECK_LIBRARY, JSON.stringify({
-      [title]: {
-        title: title,
+      [replaceWhiteSpaces(title)]: {
+        title: title.trim(),
         questions:[],
       }
     }))

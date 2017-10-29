@@ -5,6 +5,7 @@ import store from './utils/store'
 import  { Provider } from 'react-redux'
 import DeckList from './components/DeckList'
 import DeckMenu from './components/DeckMenu'
+import NewDeck from './components/NewDeck'
 
 const Tabs = TabNavigator({
   DeckList: {
@@ -13,6 +14,10 @@ const Tabs = TabNavigator({
       tabBarLabel: 'Your Decks',
       // TODO: add tabBarIcon key
     }
+  },
+  NewDeck: {
+    screen: NewDeck
+    //TODO: add navigation options to style the header
   }
 },{
   navigationOptions: {
