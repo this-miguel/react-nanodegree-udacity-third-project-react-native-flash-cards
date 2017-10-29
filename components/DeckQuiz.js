@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import  { connect } from 'react-redux'
-import { Text, View, TouchableOpacity } from 'react-native';
-import help from '../utils/helpers';
+import { Text, View} from 'react-native';
+import help from '../utils/helpers'
 
 import {
   asyncGetDeck,
 } from "../actions/AsyncActions";
 
-class DeckMenuDisconnected extends Component {
+class DeckQuizDisconnected extends Component {
 
   componentWillMount(){
     const { getDeck } = this.props;
@@ -16,35 +16,20 @@ class DeckMenuDisconnected extends Component {
   }
 
   render(){
-
-    const { deck, navigation } =  this.props;
-    const { questions } = deck;
-    const hasCards = questions.length !== 0;
+    const {deck, navigation} =  this.props;
     const { navigate } =  navigation;
-    const { replaceWhiteSpaces } = help;
-
     return(
       <View>
         <Text>{deck.title}</Text>
-        <Text>cards {deck.questions.length}</Text>
+        <Text>DeckQuiz Component</Text>
 
-        {
-          hasCards &&
-          <TouchableOpacity
-            onPress={() => navigate('DeckQuiz', {deckKey: replaceWhiteSpaces(deck.title) })}
-          >
-            <View style={{borderRadius: 6, backgroundColor: 'gray'}}>
-              <Text>Quiz</Text>
-            </View>
-          </TouchableOpacity>
-        }
       </View>
     )
   }
 
 }
 
-DeckMenuDisconnected.propTypes = {
+DeckQuizDisconnected.propTypes = {
   getDeck: PropTypes.func.isRequired,
   deck:    PropTypes.object.isRequired,
 };
@@ -63,8 +48,8 @@ function mapDispatchToProps(dispatch, OwnProps){
   }
 }
 
-const DeckMenu = connect(
+const DeckQuiz = connect(
   mapStateToProps,
   mapDispatchToProps
-)(DeckMenuDisconnected);
-export default DeckMenu;
+)(DeckQuizDisconnected);
+export default DeckQuiz;
