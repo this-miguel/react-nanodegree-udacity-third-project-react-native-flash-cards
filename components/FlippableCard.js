@@ -81,9 +81,12 @@ export default class FlippableCard extends Component {
     const { questionIndex, questions } = this.props;
     const currentQuestion = questions[questionIndex];
     const {question, answer} = currentQuestion;
-
+    const remainingCards =  questions.length - questionIndex;
     return (
       <View style={styles.container}>
+        <View style={styles.cardsLeftPosition}>
+          <Text style={styles.cardsLeftText}>{remainingCards} { remainingCards === 1 ? 'card' : 'cards'} remaining</Text>
+        </View>
         <View>
           <Animated.View style={[ frontAnimatedStyle, styles.card, styles.cardDimensions]}>
             <Text style={[ styles.cardText, {backgroundColor: '#FFEC69'} ]}>
@@ -167,6 +170,22 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     fontSize: 12,
     fontWeight: '600',
+    fontFamily: 'monospace',
+  },
+  cardsLeftPosition: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    justifyContent: "flex-end",
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  },
+  cardsLeftText: {
+    textAlign: 'center',
+    color: '#3b3a30',
+    padding: 6,
+    fontSize: 12,
+    fontWeight: 'bold',
     fontFamily: 'monospace',
   }
 });
