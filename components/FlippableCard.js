@@ -61,29 +61,34 @@ export default class FlippableCard extends Component {
       ],
       opacity: this.backOpacity
     }
+
+    const { questionIndex, questions, handleAnswer } = this.props;
+    const currentQuestion = questions[questionIndex];
+    const {question, answer} = currentQuestion;
+
     return (
       <View style={[styles.container ]}>
         <View>
           <Animated.View style={[styles.card, frontAnimatedStyle, styles.cardDimensions]}>
             <Text style={[ styles.cardText, {backgroundColor: '#FFEC69'} ]}>
-              this is the front.
+              {question}
             </Text>
           </Animated.View>
           <Animated.View style={[backAnimatedStyle, styles.card, styles.cardBack, styles.cardDimensions]}>
             <Text style={[ styles.cardText, {backgroundColor: '#ebfdf2', color: 'cadetblue'} ]}>
-              this is  the back.
+              {answer}
             </Text>
           </Animated.View>
         </View>
         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: "center"}}>
 
-          <TouchableOpacity onPress={() => (null)} style={{flex:1}}>
+          <TouchableOpacity onPress={() => handleAnswer(true)} style={{flex:1}}>
             <Text style={[styles.button, {backgroundColor: '#bfe7bf', color: '#52B762'}]}>correct</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.flipCard()} style={{flex:1}}>
             <Text style={styles.button}>flip it!</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => (null)} style={{flex:1}}>
+          <TouchableOpacity onPress={() => handleAnswer(false)} style={{flex:1}}>
             <Text style={[styles.button, {backgroundColor: '#ff8c95', color: 'white'}]}>incorrect</Text>
           </TouchableOpacity>
 
@@ -92,6 +97,12 @@ export default class FlippableCard extends Component {
     );
   }
 }
+
+FlippableCard.propTypes = {
+  handleAnswer: PropTypes.func.isRequired,
+  questionIndex: PropTypes.number.isRequired,
+  questions:    PropTypes.array.isRequired,
+};
 
 const styles = StyleSheet.create({
   container: {
