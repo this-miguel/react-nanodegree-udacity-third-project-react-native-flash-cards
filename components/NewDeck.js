@@ -30,7 +30,7 @@ class NewDeckDisconnected extends Component {
 
     return(
       <View>
-        <Text>Please enter the name of the new deck</Text>
+        <Text>Please enter the name of the new deck below</Text>
         <TextInput
           onChangeText={(text) => this.setState({text})}
           value={text}

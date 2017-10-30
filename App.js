@@ -18,7 +18,11 @@ const Tabs = TabNavigator({
     }
   },
   NewDeck: {
-    screen: NewDeck
+    screen: NewDeck,
+    navigationOptions: {
+      tabBarLabel: 'New Deck',
+      // TODO: add tabBarIcon key
+    }
     //TODO: add navigation options to style the header
   }
 },{
