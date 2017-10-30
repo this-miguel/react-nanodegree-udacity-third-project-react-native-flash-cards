@@ -7,6 +7,7 @@ import DeckList from './components/DeckList'
 import DeckMenu from './components/DeckMenu'
 import DeckQuiz from './components/DeckQuiz'
 import NewDeck from './components/NewDeck'
+import AddCard from './components/AddCard'
 
 const Tabs = TabNavigator({
   DeckList: {
@@ -50,6 +51,10 @@ const Tabs = TabNavigator({
    },
    DeckQuiz: {
      screen: DeckQuiz
+     //TODO: add navigation options to style the header
+   },
+   AddCard: {
+     screen: AddCard
      //TODO: add navigation options to style the header
    }
 

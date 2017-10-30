@@ -38,6 +38,14 @@ class DeckMenuDisconnected extends Component {
             </View>
           </TouchableOpacity>
         }
+
+        <TouchableOpacity
+          onPress={() => navigate('AddCard', {deckKey: replaceWhiteSpaces(deck.title) })}
+        >
+          <View style={{borderRadius: 6, backgroundColor: 'gray'}}>
+            <Text>Add Card</Text>
+          </View>
+        </TouchableOpacity>
       </View>
     )
   }

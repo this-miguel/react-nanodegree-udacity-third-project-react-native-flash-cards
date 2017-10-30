@@ -74,7 +74,7 @@ const addCard = (data) => (
   }
 );
 
-export const asyncAddCard = (dispatch) => (key, data) => {
+export const asyncAddCard = (dispatch) => (key)  => (data) => {
   api
     .addCard(key, data)
     .then( data => {
