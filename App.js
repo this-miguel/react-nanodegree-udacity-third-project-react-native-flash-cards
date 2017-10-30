@@ -33,7 +33,7 @@ const Tabs = TabNavigator({
     activeTintColor: 'white',
     style: {
       height: 56,
-      backgroundColor: 'blue',
+      backgroundColor: '#0A1128',
       shadowColor: 'rgba(0,0,0,0.24)',
       shadowOffset: {
         width: 0,
