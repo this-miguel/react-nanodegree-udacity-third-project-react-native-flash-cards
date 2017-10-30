@@ -49,6 +49,22 @@ export default class FlippableCard extends Component {
 
   }
 
+  flipToShowFront = () => {
+      if (this.value >= 90) {
+        Animated.timing(this.animatedValue, {
+          toValue: 0,
+          duration: 120,
+          easing: Easing.bezier(0.68, -0.55, 0.265, 1.55)
+        }).start();
+      }
+  };
+
+  handleAnswer = (answer) => {
+    this.flipToShowFront();
+    const { handleAnswer } = this.props;
+    handleAnswer(answer)
+  };
+
   render() {
     const frontAnimatedStyle = {
       transform: [
@@ -62,19 +78,19 @@ export default class FlippableCard extends Component {
       opacity: this.backOpacity
     }
 
-    const { questionIndex, questions, handleAnswer } = this.props;
+    const { questionIndex, questions } = this.props;
     const currentQuestion = questions[questionIndex];
     const {question, answer} = currentQuestion;
 
     return (
-      <View style={[styles.container ]}>
+      <View style={styles.container}>
         <View>
-          <Animated.View style={[styles.card, frontAnimatedStyle, styles.cardDimensions]}>
+          <Animated.View style={[ frontAnimatedStyle, styles.card, styles.cardDimensions]}>
             <Text style={[ styles.cardText, {backgroundColor: '#FFEC69'} ]}>
               {question}
             </Text>
           </Animated.View>
-          <Animated.View style={[backAnimatedStyle, styles.card, styles.cardBack, styles.cardDimensions]}>
+          <Animated.View style={[ backAnimatedStyle, styles.card, styles.cardBack, styles.cardDimensions]}>
             <Text style={[ styles.cardText, {backgroundColor: '#ebfdf2', color: 'cadetblue'} ]}>
               {answer}
             </Text>
@@ -82,13 +98,13 @@ export default class FlippableCard extends Component {
         </View>
         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: "center"}}>
 
-          <TouchableOpacity onPress={() => handleAnswer(true)} style={{flex:1}}>
+          <TouchableOpacity onPress={() => this.handleAnswer(true)} style={{flex:1}}>
             <Text style={[styles.button, {backgroundColor: '#bfe7bf', color: '#52B762'}]}>correct</Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={() => this.flipCard()} style={{flex:1}}>
             <Text style={styles.button}>flip it!</Text>
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => handleAnswer(false)} style={{flex:1}}>
+          <TouchableOpacity onPress={() => this.handleAnswer(false)} style={{flex:1}}>
             <Text style={[styles.button, {backgroundColor: '#ff8c95', color: 'white'}]}>incorrect</Text>
           </TouchableOpacity>
 
@@ -137,6 +153,7 @@ const styles = StyleSheet.create({
     padding: 20,
     borderRadius: 4,
     fontFamily: 'Roboto',
+    textAlign: 'center',
 
   },
   button: {
