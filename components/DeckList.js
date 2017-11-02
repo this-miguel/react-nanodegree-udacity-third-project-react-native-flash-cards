@@ -69,10 +69,6 @@ class DeckListItem extends Component {
     }
   }
 
-  componentDidMount(){
-    this.setState(this.initialState)
-  }
-
   handleAnimationOnPressItem = () => {
 
     const {height , margin} = this.state;
@@ -88,7 +84,7 @@ class DeckListItem extends Component {
             speed: 5
           }
         ),
-        Animated.timing(height,
+        Animated.spring(height,
           {
             toValue: 150,
             speed: 6
