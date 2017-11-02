@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import  { connect } from 'react-redux'
-import { Text, FlatList, View, TouchableOpacity, StyleSheet } from 'react-native';
+import { Text, FlatList, View, TouchableOpacity, StyleSheet, Animated } from 'react-native';
 import help from '../utils/helpers'
 
 import {
@@ -15,14 +15,26 @@ class DeckListDisconnected extends Component {
     getDecks()
   }
 
-  _renderItem = ({item}) => {
+  _onPressItem = (item) => {
     const { navigation } =  this.props;
     const { navigate } = navigation;
     const { replaceWhiteSpaces } = help;
 
+    // give a bit of time to the animation on DeckListItem to run before initiating the navigation action.
+    setTimeout(
+      () =>  {
+        navigate( 'DeckMenu', {deckKey: replaceWhiteSpaces(item.title)} );
+      },
+      250
+    )
+
+  };
+
+  _renderItem = ({item}) => {
+
     return(
       <DeckListItem
-        onPressItem={() => navigate( 'DeckMenu', {deckKey: replaceWhiteSpaces(item.title)} )}
+        onPressItem={() => this._onPressItem(item)}
         title={item.title}
         questionsNumber={item.questions.length}
       />
@@ -47,11 +59,76 @@ class DeckListDisconnected extends Component {
 
 }
 
-const DeckListItem = ({title, questionsNumber, onPressItem }) => (
-    <TouchableOpacity
-      onPress={onPressItem}
-    >
-      <View style={[styles.card, styles.cardDimensions, styles.cardDirectionRow]}>
+class DeckListItem extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      height: new Animated.Value(110),
+      margin: new Animated.Value(10)
+    }
+  }
+
+  componentDidMount(){
+    this.setState(this.initialState)
+  }
+
+  handleAnimationOnPressItem = () => {
+
+    const {height , margin} = this.state;
+    const { onPressItem } = this.props;
+
+    Animated.sequence([
+
+      // makes deck element to grow a bit.
+      Animated.parallel([
+        Animated.spring(margin,
+          {
+            toValue: 30,
+            speed: 5
+          }
+        ),
+        Animated.timing(height,
+          {
+            toValue: 150,
+            speed: 6
+          }
+        )
+      ]),
+
+      // this just makes sure the deck element shrink to the initial size after growing.
+      Animated.parallel([
+        Animated.spring(margin,
+          {
+            toValue: 10,
+            speed: 4
+          }
+        ),
+        Animated.spring(height,
+          {
+            toValue: 100,
+            speed: 4
+          }
+        )
+      ])
+
+    ]).start();
+
+    onPressItem()
+  };
+
+  render() {
+
+     const { title, questionsNumber } = this.props;
+     const {handleAnimationOnPressItem} = this;
+     const {height, margin} = this.state;
+
+    return (
+
+      <TouchableOpacity
+        onPress={handleAnimationOnPressItem}
+      >
+        <Animated.View style={[styles.card, styles.cardDimensions, styles.cardDirectionRow, {height, marginBottom: margin}]}>
           <Text style={styles.cardText}>
             {title}
           </Text>
@@ -60,9 +137,13 @@ const DeckListItem = ({title, questionsNumber, onPressItem }) => (
               {questionsNumber} { questionsNumber === 1 ? 'card' : 'cards'}
             </Text>
           </View>
-     </View>
-    </TouchableOpacity>
-);
+        </Animated.View>
+      </TouchableOpacity>
+
+    )
+  }
+
+}
 
 DeckListItem.propTypes = {
   title: PropTypes.string.isRequired,
