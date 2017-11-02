@@ -8,6 +8,7 @@ import DeckMenu from './components/DeckMenu'
 import DeckQuiz from './components/DeckQuiz'
 import NewDeck from './components/NewDeck'
 import AddCard from './components/AddCard'
+import { setNotification } from './utils/helpers'
 
 const Tabs = TabNavigator({
   DeckList: {
@@ -65,6 +66,10 @@ const Tabs = TabNavigator({
  });
 
 export default class App extends React.Component {
+
+  componentDidMount(){
+    setNotification();
+  }
 
   render() {
     return (

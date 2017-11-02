@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import  { connect } from 'react-redux'
 import  { View, Text,StyleSheet,TouchableOpacity } from 'react-native'
-import help from '../utils/helpers'
+import help, {setNotification, clearNotifications} from '../utils/helpers'
 import FlippableCard from './FlippableCard'
 
 import {
@@ -26,6 +26,11 @@ class DeckQuizDisconnected extends Component {
     const { getDeck } = this.props;
     getDeck()
   }
+
+  resetNotification = () => {
+    clearNotifications()
+      .then(setNotification)
+  };
 
   handleAnswer = (answer) => {
 
@@ -54,6 +59,9 @@ class DeckQuizDisconnected extends Component {
     const { showQuizResults, questionIndex, correctAnswers} =  this.state;
     
     if(showQuizResults) {
+
+      this.resetNotification();
+
       const { replaceWhiteSpaces } = help;
 
       return(
