@@ -1,4 +1,8 @@
 import {GET_DECK, GET_DECKS, NEW_DECK, UPDATE_DECK, ADD_CARD} from '../actions/types'
+import help from '../utils/helpers'
+
+const {replaceWhiteSpaces} = help;
+
 export default function reducer(state={}, {data, type}) {
   switch (type) {
 
@@ -8,7 +12,7 @@ export default function reducer(state={}, {data, type}) {
     case ADD_CARD : // This action returns the deck where the card was added.
       return {
         ...state,
-        [data.title] : {
+        [replaceWhiteSpaces(data.title)] : {
           ...data
         }
       };

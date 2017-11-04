@@ -27,7 +27,7 @@ const api = {
       }
     }))
       // returns the new deck
-      .then( () => this.getDeck(title))
+      .then( () => this.getDeck( replaceWhiteSpaces(title) ))
   },
 
   updateDeck: function (key, data) {

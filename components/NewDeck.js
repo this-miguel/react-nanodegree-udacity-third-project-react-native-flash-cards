@@ -18,8 +18,15 @@ class NewDeckDisconnected extends Component {
   handleSubmit = () => {
     const { navigation, newDeck } =  this.props;
     const { navigate } = navigation;
-    newDeck(this.state.text);
-    navigate('Home')
+    const {replaceWhiteSpaces} = help;
+    const {text} = this.state;
+
+    newDeck(text)
+      .then(({data}) => {
+        const {title} = data;
+
+        navigate('DeckMenu', { deckKey: replaceWhiteSpaces(title)})
+      })
   };
 
   render(){

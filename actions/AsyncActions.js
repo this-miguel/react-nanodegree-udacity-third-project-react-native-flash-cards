@@ -15,11 +15,11 @@ const newDeck = (data) => (
   }
 );
 
-export const asyncNewDeck = (dispatch) => (title) => {
+export const asyncNewDeck = (dispatch) => (title) => (
   api
     .newDeck(title)
     .then( data => dispatch( newDeck(data) ))
-};
+);
 
 const getDecks = (data) => (
   {
