@@ -46,21 +46,28 @@ const Tabs = TabNavigator({
   }
 });
 
+const navigationOptions = {
+  headerTintColor: 'white',
+  headerStyle: {
+    backgroundColor: '#0A1128',
+  }
+};
+
  const  MainNavigator = StackNavigator({
    Home:{
      screen: Tabs
    },
    DeckMenu: {
-     screen: DeckMenu
-     //TODO: add navigation options to style the header
+     screen: DeckMenu,
+     navigationOptions: navigationOptions
    },
    DeckQuiz: {
-     screen: DeckQuiz
-     //TODO: add navigation options to style the header
+     screen: DeckQuiz,
+     navigationOptions: navigationOptions
    },
    AddCard: {
-     screen: AddCard
-     //TODO: add navigation options to style the header
+     screen: AddCard,
+     navigationOptions: navigationOptions
    }
 
  });
