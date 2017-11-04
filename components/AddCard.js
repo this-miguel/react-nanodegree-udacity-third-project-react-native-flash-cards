@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import  { connect } from 'react-redux'
-import { Text, View, TouchableOpacity, TextInput } from 'react-native';
+import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import help from '../utils/helpers';
 
 import {
@@ -10,6 +10,13 @@ import {
 } from "../actions/AsyncActions";
 
 class AddCardDisconnected extends Component {
+
+  static navigationOptions = ({navigation}) => {
+    const {deckTitle} = navigation.state.params;
+    return {
+      title: deckTitle
+    }
+  };
 
   constructor(props){
     super(props);
@@ -37,42 +44,47 @@ class AddCardDisconnected extends Component {
 
   render(){
 
-    const { navigation, deck } =  this.props;
+    const { deck } =  this.props;
     const { title, questions } =  deck;
     const {handleSubmit} = this;
     const {question, answer} = this.state;
-    const { navigate } =  navigation;
     const { replaceWhiteSpaces } = help;
     const validCard = replaceWhiteSpaces(question).length !== 0  &&
                       replaceWhiteSpaces(answer).length   !== 0;
 
-    return(
-      <View>
+    const {
+      container,
+      card,
+      cardDimensions,
+      cardsLeftPosition,
+      cardsLeftText,
+      cardText,
+      button
+    } = styles;
 
-        <View>
-          <Text>
-            {title}
-          </Text>
-          <Text>
-            number of cards {questions.length}
-          </Text>
+    return(
+      <View style={container}>
+        <View style={cardsLeftPosition}>
+          <Text style={cardsLeftText}>number of cards: {questions.length}</Text>
         </View>
-        <View>
-          <Text>
-            card front / question
+        <View style={[card, cardDimensions , {backgroundColor: '#FFEC69'}]}>
+          <Text style={[ cardText, {opacity: 0.5}] }>
+            (card front / question)
           </Text>
           <TextInput
+            style={[cardText, {width: 200, opacity: 0.75}]}
             onChangeText={(question) => this.setState({question})}
             value={question}
             multiline = {true}
             numberOfLines = {3}
           />
         </View>
-        <View>
-          <Text>
-            card back / answer
+        <View style={[card, cardDimensions]}>
+          <Text style={[ cardText, {opacity: 0.5}] }>
+            (card back / answer)
           </Text>
           <TextInput
+            style={[cardText, {width: 200, opacity: 0.75}]}
             onChangeText={(answer) => this.setState({answer})}
             value={answer}
             multiline = {true}
@@ -84,8 +96,8 @@ class AddCardDisconnected extends Component {
           <TouchableOpacity
             onPress={ handleSubmit }
           >
-            <View style={{borderRadius: 6, backgroundColor: 'gray'}}>
-              <Text> Submit Card </Text>
+            <View>
+              <Text style={button} >Submit Card</Text>
             </View>
           </TouchableOpacity>
         }
@@ -122,3 +134,62 @@ const AddCard = connect(
   mapDispatchToProps
 )(AddCardDisconnected);
 export default AddCard;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: '#989898'
+  },
+  card: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#d8dfe5',
+  },
+  cardDimensions: {
+    width: 260,
+    height: 160,
+    borderRadius: 4,
+    marginBottom: 15,
+
+  },
+  cardText: {
+    fontSize: 16,
+    color: 'black',
+    fontWeight: '200',
+    padding: 4,
+    fontFamily: 'Roboto',
+    textAlign: 'center',
+
+  },
+  button: {
+    textAlign: 'center',
+    backgroundColor: '#1a75ff',
+    color: '#80b3ff',
+    marginTop: 20,
+    borderRadius: 4,
+    padding: 6,
+    marginRight: 8,
+    marginLeft: 8,
+    fontSize: 12,
+    fontWeight: '600',
+    fontFamily: 'monospace',
+  },
+  cardsLeftPosition: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    justifyContent: "flex-end",
+    position: 'absolute',
+    top: 10,
+    right: 10,
+  },
+  cardsLeftText: {
+    textAlign: 'center',
+    color: '#3b3a30',
+    padding: 6,
+    fontSize: 12,
+    fontWeight: 'bold',
+    fontFamily: 'monospace',
+  }
+});
