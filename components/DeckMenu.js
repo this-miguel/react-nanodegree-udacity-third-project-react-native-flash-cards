@@ -45,7 +45,15 @@ class DeckMenuDisconnected extends Component {
           }
 
           <TouchableOpacity
-            onPress={() => navigate('AddCard', {deckKey: replaceWhiteSpaces(deck.title) })}
+            onPress={() => {
+              navigate(
+                'AddCard',
+                {
+                  deckKey: replaceWhiteSpaces(deck.title),
+                  deckTitle: deck.title
+                }
+              )
+            }}
             style={{flex:1}}
           >
             <View >
