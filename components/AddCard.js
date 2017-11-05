@@ -1,7 +1,14 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import  { connect } from 'react-redux'
-import { Text, View, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput,
+  StyleSheet,
+  KeyboardAvoidingView
+} from 'react-native';
 import help from '../utils/helpers';
 
 import {
@@ -71,34 +78,38 @@ class AddCardDisconnected extends Component {
           <Text style={[ cardText, {opacity: 0.5}] }>
             (card front / question)
           </Text>
-          <TextInput
-            style={[cardText, {width: 200, opacity: 0.75}]}
-            onChangeText={(question) => this.setState({question})}
-            value={question}
-            multiline = {true}
-            numberOfLines = {3}
-          />
+          <KeyboardAvoidingView behavior='padding'>
+            <TextInput
+              style={[cardText, {width: 200, opacity: 0.75}]}
+              onChangeText={(question) => this.setState({question})}
+              value={question}
+              multiline = {true}
+              numberOfLines = {3}
+            />
+          </KeyboardAvoidingView>
         </View>
         <View style={[card, cardDimensions]}>
           <Text style={[ cardText, {opacity: 0.5}] }>
             (card back / answer)
           </Text>
-          <TextInput
-            style={[cardText, {width: 200, opacity: 0.75}]}
-            onChangeText={(answer) => this.setState({answer})}
-            value={answer}
-            multiline = {true}
-            numberOfLines = {3}
-          />
+          <KeyboardAvoidingView behavior='padding'>
+            <TextInput
+              style={[cardText, {width: 200, opacity: 0.75}]}
+              onChangeText={(answer) => this.setState({answer})}
+              value={answer}
+              multiline = {true}
+              numberOfLines = {3}
+            />
+          </KeyboardAvoidingView>
         </View>
         {
           validCard &&
           <TouchableOpacity
             onPress={ handleSubmit }
           >
-            <View>
+            <KeyboardAvoidingView behavior='padding'>
               <Text style={button} >Submit Card</Text>
-            </View>
+            </KeyboardAvoidingView>
           </TouchableOpacity>
         }
       </View>
