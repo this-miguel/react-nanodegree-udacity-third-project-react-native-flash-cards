@@ -70,49 +70,45 @@ class AddCardDisconnected extends Component {
     } = styles;
 
     return(
-      <View style={container}>
-        <View style={cardsLeftPosition}>
-          <Text style={cardsLeftText}>number of cards: {questions.length}</Text>
-        </View>
-        <View style={[card, cardDimensions , {backgroundColor: '#FFEC69'}]}>
-          <Text style={[ cardText, {opacity: 0.5}] }>
-            (card front / question)
-          </Text>
-          <KeyboardAvoidingView behavior='padding'>
-            <TextInput
-              style={[cardText, {width: 200, opacity: 0.75}]}
-              onChangeText={(question) => this.setState({question})}
-              value={question}
-              multiline = {true}
-              numberOfLines = {3}
-            />
-          </KeyboardAvoidingView>
-        </View>
-        <View style={[card, cardDimensions]}>
-          <Text style={[ cardText, {opacity: 0.5}] }>
-            (card back / answer)
-          </Text>
-          <KeyboardAvoidingView behavior='padding'>
-            <TextInput
-              style={[cardText, {width: 200, opacity: 0.75}]}
-              onChangeText={(answer) => this.setState({answer})}
-              value={answer}
-              multiline = {true}
-              numberOfLines = {3}
-            />
-          </KeyboardAvoidingView>
-        </View>
-        {
-          validCard &&
-          <TouchableOpacity
-            onPress={ handleSubmit }
-          >
-            <KeyboardAvoidingView behavior='padding'>
+      <KeyboardAvoidingView behavior='padding' style={container}>
+        <View>
+          <View style={cardsLeftPosition}>
+            <Text style={cardsLeftText}>number of cards: {questions.length}</Text>
+          </View>
+          <View style={[card, cardDimensions , {backgroundColor: '#FFEC69'}]}>
+            <Text style={[ cardText, {opacity: 0.5}] }>
+              (card front / question)
+            </Text>
+              <TextInput
+                style={[cardText, {width: 200, opacity: 0.75}]}
+                onChangeText={(question) => this.setState({question})}
+                value={question}
+                multiline = {true}
+                numberOfLines = {3}
+              />
+          </View>
+          <View style={[card, cardDimensions]}>
+            <Text style={[ cardText, {opacity: 0.5}] }>
+              (card back / answer)
+            </Text>
+              <TextInput
+                style={[cardText, {width: 200, opacity: 0.75}]}
+                onChangeText={(answer) => this.setState({answer})}
+                value={answer}
+                multiline = {true}
+                numberOfLines = {3}
+              />
+          </View>
+          {
+            validCard &&
+            <TouchableOpacity
+              onPress={ handleSubmit }
+            >
               <Text style={button} >Submit Card</Text>
-            </KeyboardAvoidingView>
-          </TouchableOpacity>
-        }
-      </View>
+            </TouchableOpacity>
+          }
+        </View>
+      </KeyboardAvoidingView>
     )
   }
 

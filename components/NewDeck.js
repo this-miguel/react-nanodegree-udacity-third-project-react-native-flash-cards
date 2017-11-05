@@ -2,7 +2,14 @@ import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import  { connect } from 'react-redux'
 import help from '../utils/helpers'
-import { Text, TextInput, View, TouchableOpacity, StyleSheet } from 'react-native';
+import {
+  Text,
+  TextInput,
+  View,
+  TouchableOpacity,
+  StyleSheet,
+  KeyboardAvoidingView
+} from 'react-native';
 
 import {
   asyncNewDeck,
@@ -36,27 +43,28 @@ class NewDeckDisconnected extends Component {
     const validDeckName = replaceWhiteSpaces(text).length !== 0    ;
     const {container, card, cardDimensions, cardText, button } = styles;
     return(
-      <View style={container}>
-        <View style={[card, cardDimensions]}>
-          <Text style={cardText}>Please enter the name of the new deck below:</Text>
-          <TextInput
-            style={[ cardText, {width: 200} ]}
-            onChangeText={(text) => this.setState({text})}
-            value={text}
-          />
+      <KeyboardAvoidingView behavior='padding' style={container}>
+        <View >
+          <View style={[card, cardDimensions]}>
+            <Text style={cardText}>Please enter the name of the new deck below:</Text>
+            <TextInput
+              style={[ cardText, {width: 200} ]}
+              onChangeText={(text) => this.setState({text})}
+              value={text}
+            />
+          </View>
+          {
+            validDeckName &&
+            <TouchableOpacity
+              onPress={this.handleSubmit}
+            >
+              <Text style={button}>
+                Save
+              </Text>
+            </TouchableOpacity>
+          }
         </View>
-        {
-          validDeckName &&
-          <TouchableOpacity
-            onPress={this.handleSubmit}
-          >
-            <Text style={button}>
-              Save
-            </Text>
-          </TouchableOpacity>
-        }
-
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 
