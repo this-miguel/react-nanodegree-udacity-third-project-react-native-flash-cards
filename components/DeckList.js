@@ -47,13 +47,15 @@ class DeckListDisconnected extends Component {
 
     const { decks } =  this.props;
     return(
-      <FlatList
-        contentContainerStyle={styles.container}
-        data={decks}
-        renderItem={this._renderItem}
-        keyExtractor={this._keyExtractor}
-        scrollEnabled={true}
-      />
+      <View style={styles.background}>
+        <FlatList
+          contentContainerStyle={styles.container}
+          data={decks}
+          renderItem={this._renderItem}
+          keyExtractor={this._keyExtractor}
+          scrollEnabled={true}
+        />
+      </View>
     )
   }
 
@@ -173,7 +175,11 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "stretch",
     justifyContent: "flex-start",
-    backgroundColor: '#0A1128'
+    backgroundColor: '#0A1128',
+  },
+  background:{
+    backgroundColor: '#0A1128',
+    flex: 1
   },
   card: {
     flex: 1,
