@@ -241,7 +241,7 @@ const styles = StyleSheet.create({
      borderRadius: 4,
      fontFamily: 'monospace',
      textAlign: 'left',
-    opacity: 0.50
+     opacity: 0.50,
 
   },
   numberOfCards: {
