@@ -98,7 +98,7 @@ class AddCardDisconnected extends Component {
           onFocus={() => this.setState({showQuestionFirst: false})}
           value={answer}
           multiline = {true}
-          numberOfLines = {3}
+          numberOfLines = {2}
           autoFocus={!showQuestionFirst}
         />
       </View>
@@ -177,19 +177,20 @@ const styles = StyleSheet.create({
   },
   cardDimensions: {
     width: 260,
-    height: 160,
+    height: 130,
     borderRadius: 4,
     marginBottom: 15,
 
   },
   cardText: {
-    fontSize: 16,
+    fontSize: 12,
     color: 'black',
-    fontWeight: '200',
-    padding: 4,
-    fontFamily: 'Roboto',
+    fontWeight: 'bold',
+    padding: 8,
+    borderRadius: 4,
+    fontFamily: 'monospace',
     textAlign: 'center',
-
+    opacity: 0.50,
   },
   button: {
     textAlign: 'center',
