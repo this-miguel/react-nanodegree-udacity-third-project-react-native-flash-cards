@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
 
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#d8dfe5',
+    backgroundColor: '#DDF6FE',
 
   },
   cardDimensions: {
@@ -168,11 +168,12 @@ const styles = StyleSheet.create({
 
     fontSize: 16,
     color: 'black',
-    fontWeight: '300',
+    fontWeight: 'bold',
     padding: 20,
     borderRadius: 4,
-    fontFamily: 'Roboto',
+    fontFamily: 'monospace',
     textAlign: 'center',
+    opacity: 0.50,
 
   },
   button: {
