@@ -29,7 +29,8 @@ class AddCardDisconnected extends Component {
     super(props);
     this.initialState = {
       question: '',
-      answer: ''
+      answer: '',
+      showQuestionFirst: true,
     };
     this.state = this.initialState
   }
@@ -52,9 +53,9 @@ class AddCardDisconnected extends Component {
   render(){
 
     const { deck } =  this.props;
-    const { title, questions } =  deck;
+    const { questions } =  deck;
     const {handleSubmit} = this;
-    const {question, answer} = this.state;
+    const {question, answer, showQuestionFirst} = this.state;
     const { replaceWhiteSpaces } = help;
     const validCard = replaceWhiteSpaces(question).length !== 0  &&
                       replaceWhiteSpaces(answer).length   !== 0;
@@ -69,45 +70,65 @@ class AddCardDisconnected extends Component {
       button
     } = styles;
 
+    const questionView = (
+      <View style={[card, cardDimensions , {backgroundColor: '#FFEC69', marginTop: 15}]}>
+        <Text style={[ cardText, {opacity: 0.5}] }>
+          (card front / question)
+        </Text>
+        <TextInput
+          style={[cardText, {width: 200, opacity: 0.75}]}
+          onChangeText={(question) => this.setState({question})}
+          onFocus={() => this.setState({showQuestionFirst: true})}
+          value={question}
+          multiline = {true}
+          numberOfLines = {3}
+          autoFocus={showQuestionFirst}
+        />
+      </View>
+    );
+
+    const answerView = (
+      <View style={[card, cardDimensions]}>
+        <Text style={[ cardText, {opacity: 0.5}] }>
+          (card back / answer)
+        </Text>
+        <TextInput
+          style={[cardText, {width: 200, opacity: 0.75}]}
+          onChangeText={(answer) => this.setState({answer, showQuestionFirst: false})}
+          onFocus={() => this.setState({showQuestionFirst: false})}
+          value={answer}
+          multiline = {true}
+          numberOfLines = {3}
+          autoFocus={!showQuestionFirst}
+        />
+      </View>
+    );
+
     return(
       <KeyboardAvoidingView behavior='padding' style={container}>
-        <View>
-          <View style={cardsLeftPosition}>
+        <View style={cardsLeftPosition}>
             <Text style={cardsLeftText}>number of cards: {questions.length}</Text>
-          </View>
-          <View style={[card, cardDimensions , {backgroundColor: '#FFEC69'}]}>
-            <Text style={[ cardText, {opacity: 0.5}] }>
-              (card front / question)
-            </Text>
-              <TextInput
-                style={[cardText, {width: 200, opacity: 0.75}]}
-                onChangeText={(question) => this.setState({question})}
-                value={question}
-                multiline = {true}
-                numberOfLines = {3}
-              />
-          </View>
-          <View style={[card, cardDimensions]}>
-            <Text style={[ cardText, {opacity: 0.5}] }>
-              (card back / answer)
-            </Text>
-              <TextInput
-                style={[cardText, {width: 200, opacity: 0.75}]}
-                onChangeText={(answer) => this.setState({answer})}
-                value={answer}
-                multiline = {true}
-                numberOfLines = {3}
-              />
-          </View>
-          {
-            validCard &&
-            <TouchableOpacity
-              onPress={ handleSubmit }
-            >
-              <Text style={button} >Submit Card</Text>
-            </TouchableOpacity>
-          }
         </View>
+        { showQuestionFirst && (
+          <View>
+          {questionView}
+          {answerView}
+          </View>
+        )}
+        { !showQuestionFirst && (
+          <View>
+            {answerView}
+            {questionView}
+          </View>
+        )}
+        {
+          validCard &&
+          <TouchableOpacity
+            onPress={ handleSubmit }
+          >
+            <Text style={button} >Submit Card</Text>
+          </TouchableOpacity>
+        }
       </KeyboardAvoidingView>
     )
   }
@@ -146,13 +167,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     backgroundColor: '#0A1128',
   },
   card: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#d8dfe5',
+    backgroundColor: '#DDF6FE',
   },
   cardDimensions: {
     width: 260,
@@ -177,23 +198,22 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 4,
     padding: 6,
-    marginRight: 8,
-    marginLeft: 8,
+    marginRight: 5,
+    marginLeft: 5,
     fontSize: 12,
     fontWeight: '600',
     fontFamily: 'monospace',
   },
   cardsLeftPosition: {
+    flex: 1,
     flexDirection: 'row',
-    alignSelf: 'flex-end',
-    justifyContent: "flex-end",
-    position: 'absolute',
-    top: 10,
-    right: 10,
+    maxHeight: 10,
+    marginBottom: 30,
+    alignItems: 'flex-start'
   },
   cardsLeftText: {
     textAlign: 'center',
-    color: '#3b3a30',
+    color: '#DDF6FE',
     padding: 6,
     fontSize: 12,
     fontWeight: 'bold',
