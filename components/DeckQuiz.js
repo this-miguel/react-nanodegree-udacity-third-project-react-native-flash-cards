@@ -11,6 +11,13 @@ import {
 
 class DeckQuizDisconnected extends Component {
 
+  static navigationOptions = ({navigation}) => {
+    const {deckTitle} = navigation.state.params;
+    return {
+      title: deckTitle
+    }
+  };
+
   constructor(props){
     super(props);
     this.initialState = {

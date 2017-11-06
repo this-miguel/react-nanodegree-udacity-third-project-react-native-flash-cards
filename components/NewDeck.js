@@ -32,7 +32,7 @@ class NewDeckDisconnected extends Component {
       .then(({data}) => {
         const {title} = data;
 
-        navigate('DeckMenu', { deckKey: replaceWhiteSpaces(title)})
+        navigate('DeckMenu', { deckKey: replaceWhiteSpaces(title), deckTitle: title })
       })
   };
 

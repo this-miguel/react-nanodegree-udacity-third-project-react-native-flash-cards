@@ -10,6 +10,13 @@ import {
 
 class DeckMenuDisconnected extends Component {
 
+  static navigationOptions = ({navigation}) => {
+    const {deckTitle} = navigation.state.params;
+    return {
+      title: deckTitle
+    }
+  };
+
   componentWillMount(){
     const { getDeck } = this.props;
     getDeck()
@@ -35,7 +42,7 @@ class DeckMenuDisconnected extends Component {
           {
             hasCards &&
             <TouchableOpacity
-              onPress={() => navigate('DeckQuiz', {deckKey: replaceWhiteSpaces(deck.title) })}
+              onPress={() => navigate('DeckQuiz', { deckKey: replaceWhiteSpaces(deck.title), deckTitle: deck.title })}
               style={{flex:1}}
             >
               <View>

@@ -23,7 +23,14 @@ class DeckListDisconnected extends Component {
     // give a bit of time to the animation on DeckListItem to run before initiating the navigation action.
     setTimeout(
       () =>  {
-        navigate( 'DeckMenu', {deckKey: replaceWhiteSpaces(item.title)} );
+        navigate(
+          'DeckMenu',
+          {
+            deckKey: replaceWhiteSpaces(item.title),
+            deckTitle: item.title
+
+          }
+        );
       },
       250
     )
