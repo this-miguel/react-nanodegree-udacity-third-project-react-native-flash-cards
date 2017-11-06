@@ -106,14 +106,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: '#989898'
+    backgroundColor: '#0A1128'
 
   },
   card: {
 
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#d8dfe5',
+    backgroundColor: '#FFEC69',
 
   },
   cardDimensions: {

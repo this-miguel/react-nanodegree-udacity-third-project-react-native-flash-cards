@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: '#989898'
+    backgroundColor: '#0A1128'
 
   },
   card: {

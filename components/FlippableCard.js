@@ -128,7 +128,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: '#989898'
+    backgroundColor: '#0A1128'
   },
   card: {
     alignItems: 'center',
@@ -182,7 +182,7 @@ const styles = StyleSheet.create({
   },
   cardsLeftText: {
     textAlign: 'center',
-    color: '#3b3a30',
+    color: "#d8dfe5",
     padding: 6,
     fontSize: 12,
     fontWeight: 'bold',
