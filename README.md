@@ -54,4 +54,4 @@ that you will be able to scan with the expo app from the google play store menti
 ## Create React App
 This project was bootstrapped with [Create React Native App](https://github.com/react-community/create-react-native-app).
 ## Thank you!
-__Thanks for taking some of your time to take a look of my project!__
+__Thanks for taking some of your time to take a look at my project!__
