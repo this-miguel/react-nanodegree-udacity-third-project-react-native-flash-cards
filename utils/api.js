@@ -6,13 +6,25 @@ export const DECK_LIBRARY = 'MobileFlashcards:DeckLibrary';
 
 const api = {
   initializeDeckLibrary: function (data){
-    AsyncStorage.setItem(DECK_LIBRARY, JSON.stringify(data))
+     return AsyncStorage.setItem(DECK_LIBRARY, JSON.stringify(data))
   },
 
-  getDecks: () => (
-    AsyncStorage.getItem(DECK_LIBRARY)
-      .then((data) => JSON.parse(data))
-  ),
+  deleteDeckLibrary: () => (AsyncStorage.removeItem(DECK_LIBRARY)),
+
+  getDecks: function() {
+     return AsyncStorage.getItem(DECK_LIBRARY)
+      .then((data) => {
+        if (data === null) {
+          // this should run only the first time the app boots. When the DECK_LIBRARY does not exist.
+          this.initializeDeckLibrary({});
+          return {}
+        } else {
+          // Any other time should return the data stored.
+          return JSON.parse(data)
+        }
+      })
+  }
+  ,
 
   getDeck: function(key) {
     return this.getDecks()

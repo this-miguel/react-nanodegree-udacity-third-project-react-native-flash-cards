@@ -46,10 +46,27 @@ class DeckListDisconnected extends Component {
   render(){
 
     const { decks } =  this.props;
+    if(decks === undefined || decks === null || decks.length === 0 ){
+
+      const {containerEmpty, warningCard, cardText} = styles;
+
+      return(
+        <View style={containerEmpty}>
+          <View style={warningCard}>
+            <Text style={[cardText, { opacity: 0.5 }]}>
+              You have not created decks yet. Please tab in the 'NEW DECK' tab above to create one.
+            </Text>
+          </View>
+        </View>
+      )
+    }
+
+    const { background, container } =  styles;
+
     return(
-      <View style={styles.background}>
+      <View style={background}>
         <FlatList
-          contentContainerStyle={styles.container}
+          contentContainerStyle={container}
           data={decks}
           renderItem={this._renderItem}
           keyExtractor={this._keyExtractor}
@@ -172,6 +189,21 @@ const DeckList = connect(
 export default DeckList;
 
 const styles = StyleSheet.create({
+  containerEmpty: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: '#0A1128',
+  },
+  warningCard: {
+    height: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#FFEC69',
+    borderRadius: 4,
+    marginLeft: 20,
+    marginRight: 20,
+  },
   container: {
     alignItems: "stretch",
     justifyContent: "flex-start",
