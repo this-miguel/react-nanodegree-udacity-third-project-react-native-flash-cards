@@ -224,7 +224,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'stretch',
     justifyContent: 'flex-start',
-    backgroundColor: '#D5E9FF',
+    backgroundColor: '#DDF6FE',
     marginLeft: 10,
     marginRight: 10,
     marginBottom: 10,
@@ -235,12 +235,13 @@ const styles = StyleSheet.create({
   },
   cardText: {
      fontSize: 20,
-     color: '#424874',
+     color: 'black',
      fontWeight: 'bold',
      padding: 20,
      borderRadius: 4,
      fontFamily: 'monospace',
      textAlign: 'left',
+    opacity: 0.50
 
   },
   numberOfCards: {
@@ -250,6 +251,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontFamily: 'monospace',
+    opacity: 0.75
   },
   numberOfCardsView: {
     alignSelf: 'flex-end',
