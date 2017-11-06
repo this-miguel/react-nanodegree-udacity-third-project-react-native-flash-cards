@@ -30,12 +30,13 @@ class DeckMenuDisconnected extends Component {
     const { navigate } =  navigation;
     const { replaceWhiteSpaces } = help;
     const numberOfCards = deck.questions.length;
+    const {card, cardDimensions, cardText, button, container} = styles;
 
     return(
-      <View style={styles.container}>
-        <View style={[styles.card, styles.cardDimensions]}>
-        <Text>{deck.title}</Text>
-        <Text>{numberOfCards === 1 ? '1 card' : `${numberOfCards} cards`}</Text>
+      <View style={container}>
+        <View style={[card, cardDimensions]}>
+        <Text style={cardText}>{deck.title}</Text>
+        <Text style={cardText}>{numberOfCards === 1 ? '1 card' : `${numberOfCards} cards`}</Text>
       </View>
 
         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: "center"}}>
@@ -46,7 +47,7 @@ class DeckMenuDisconnected extends Component {
               style={{flex:1}}
             >
               <View>
-                <Text style={[styles.button, {backgroundColor: '#96ceb4', color: '#588c7e'}]}>Quiz</Text>
+                <Text style={[button, {backgroundColor: '#96ceb4', color: '#588c7e'}]}>Quiz</Text>
               </View>
             </TouchableOpacity>
           }
@@ -64,7 +65,7 @@ class DeckMenuDisconnected extends Component {
             style={{flex:1}}
           >
             <View >
-              <Text style={[styles.button]}>Add Card</Text>
+              <Text style={button}>Add Card</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -127,11 +128,12 @@ const styles = StyleSheet.create({
 
     fontSize: 16,
     color: 'black',
-    fontWeight: '300',
+    fontWeight: 'bold',
     padding: 20,
     borderRadius: 4,
-    fontFamily: 'Roboto',
-    textAlign: 'center',
+    fontFamily: 'monospace',
+    textAlign: 'left',
+    opacity: 0.50,
 
   },
   button: {
