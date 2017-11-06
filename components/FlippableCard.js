@@ -89,12 +89,12 @@ export default class FlippableCard extends Component {
         </View>
         <View>
           <Animated.View style={[ frontAnimatedStyle, styles.card, styles.cardDimensions]}>
-            <Text style={[ styles.cardText, {backgroundColor: '#FFEC69'} ]}>
+            <Text style={[ styles.cardText, {} ]}>
               {question}
             </Text>
           </Animated.View>
           <Animated.View style={[ backAnimatedStyle, styles.card, styles.cardBack, styles.cardDimensions]}>
-            <Text style={[ styles.cardText, {backgroundColor: '#ebfdf2', color: 'cadetblue'} ]}>
+            <Text style={[ styles.cardText, { color: 'cadetblue'} ]}>
               {answer}
             </Text>
           </Animated.View>
@@ -133,11 +133,11 @@ const styles = StyleSheet.create({
   card: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#d8dfe5',
+    backgroundColor: '#FFEC69',
   },
   cardBack: {
 
-    backgroundColor: "#d8dfe5",
+    backgroundColor: '#DDF6FE',
     position: "absolute",
     top: 0,
   },
@@ -148,15 +148,14 @@ const styles = StyleSheet.create({
 
   },
   cardText: {
-    width: 260,
-    height: 260,
-    fontSize: 20,
+    fontSize: 16,
     color: 'black',
-    fontWeight: '300',
+    fontWeight: 'bold',
     padding: 20,
     borderRadius: 4,
-    fontFamily: 'Roboto',
+    fontFamily: 'monospace',
     textAlign: 'center',
+    opacity: 0.50,
 
   },
   button: {
