@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { TabNavigator, StackNavigator } from 'react-navigation'
 import store from './utils/store'
 import  { Provider } from 'react-redux'
@@ -8,6 +8,7 @@ import DeckMenu from './components/DeckMenu'
 import DeckQuiz from './components/DeckQuiz'
 import NewDeck from './components/NewDeck'
 import AddCard from './components/AddCard'
+import SimpleStatusBar from './components/SimpleStatusBar'
 import { setNotification } from './utils/helpers'
 
 const Tabs = TabNavigator({
@@ -79,19 +80,15 @@ export default class App extends React.Component {
   }
 
   render() {
+
     return (
-      <Provider store={store}>
-        <MainNavigator/>
-      </Provider>
+        <View style={{flex: 1}}>
+          <SimpleStatusBar backgroundColor='#0A1128'/>
+          <Provider store={store}>
+              <MainNavigator/>
+          </Provider>
+        </View>
     );
+
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
